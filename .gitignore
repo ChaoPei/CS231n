@@ -1,7 +1,5 @@
 *.swp
 
 *.pyc
-.
-env/*
 
 cifar10
