@@ -27,7 +27,7 @@ def affine_forward(x, w, b):
     # will need to reshape the input into rows.                               #
     ###########################################################################
     N = x.shape[0]
-    x_rsp = x.shape(N, -1)
+    x_rsp = x.reshape(N, -1)
     out = x_rsp.dot(w) + b
     ###########################################################################
     #                             END OF YOUR CODE                            #
@@ -329,7 +329,7 @@ def dropout_forward(x, dropout_param):
         # TODO: Implement training phase forward pass for inverted dropout.   #
         # Store the dropout mask in the mask variable.                        #
         #######################################################################
-        mask = (np.random.rand(x.shape) >= p) / (1 - p)
+        mask = (np.random.rand(*x.shape) >= p) / (1 - p)
         out = x * mask
         #######################################################################
         #                           END OF YOUR CODE                          #
