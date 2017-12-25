@@ -508,7 +508,7 @@ def max_pool_forward_naive(x, pool_param):
     HH, WW, stride = pool_param['pool_height'], pool_param['pool_width'], pool_param['stride']
     H_out = (H - HH) / stride + 1
     W_out = (W - WW) / stride + 1
-    out = np.zeros((N, C, H_out. W_out))
+    out = np.zeros((N, C, H_out, W_out))
     for i in xrange(H_out):
         for j in xrange(W_out):
             x_masked = x[:, :, i*stride:i*stride+HH, j*stride:j*stride+WW]

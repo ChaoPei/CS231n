@@ -92,10 +92,10 @@ class ThreeLayerConvNet(object):
         # computing the class scores for X and storing them in the scores          #
         # variable.                                                                #
         ############################################################################
-        conv_forward_out_1, cache_forward_1 = conv_relu_forward(
+        conv_forward_out_1, cache_forward_1 = conv_relu_pool_forward(
             X, self.params['W1'], self.params['b1'], conv_param, pool_param)
         affine_forward_out_2, cache_forward_2 = affine_forward(
-            conv_forward_out_1, self.params.params['W2'], self.params['b2'])
+            conv_forward_out_1, self.params['W2'], self.params['b2'])
         affine_relu_2, cache_relu_2 = relu_forward(affine_forward_out_2)
         scores, cache_forward_3 = affine_forward(
             affine_relu_2, self.params['W3'], self.params['b3'])
@@ -119,7 +119,7 @@ class ThreeLayerConvNet(object):
         dX3, grads['W3'], grads['b3'] = affine_backward(dout, cache_forward_3)
         dX2 = relu_backward(dX3, cache_relu_2)
         dX2, grads['W2'], grads['b2'] = affine_backward(dX2, cache_forward_2)
-        dX1, grads['W1']. grads['b1'] = conv_relu_pool_backward(dX2, cache_forward_1)
+        dX1, grads['W1'], grads['b1'] = conv_relu_pool_backward(dX2, cache_forward_1)
 
         for i in range(1, 4):
             grads['W%d' % (i)] = grads['W%d' % (i)] + self.reg * self.params['W%d' % (i)]
